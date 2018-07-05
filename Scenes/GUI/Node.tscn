@@ -1,8 +1,10 @@
 [gd_scene load_steps=5 format=2]
 
-[ext_resource path="res://Scenes/Area2D.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/GUI/Area2D.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/temp/node.png" type="Texture" id=2]
-[ext_resource path="res://Scenes/Popup.tscn" type="PackedScene" id=3]
+[ext_resource path="res://Scenes/GUI/Popup.tscn" type="PackedScene" id=3]
+
+
 
 [sub_resource type="CircleShape2D" id=1]
 
@@ -30,8 +32,15 @@ texture = ExtResource( 2 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D" index="1"]
 
+position = Vector2( -0.115982, 0 )
+z_index = 10
+z_as_relative = false
 shape = SubResource( 1 )
+_sections_unfolded = [ "Z Index" ]
 
 [node name="Popup" parent="." index="1" instance=ExtResource( 3 )]
+
+mouse_filter = 2
+_sections_unfolded = [ "Mouse" ]
 
 

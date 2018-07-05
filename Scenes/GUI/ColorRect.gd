@@ -3,7 +3,7 @@ extends TextureButton
 # class member variables go here, for example:
 # var a = 2
 # var b = "textvar"
-var cauldron = load("res://Scenes/Cauldron.tscn")
+var cauldron = load("res://Scenes/Stations/Cauldron.tscn")
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
@@ -26,4 +26,3 @@ func _on_ColorRect_pressed():
 	for child in node.get_children():
 		child.queue_free()
 	node.queue_free()
-	pass # replace with function body

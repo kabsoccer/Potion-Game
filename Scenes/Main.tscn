@@ -1,13 +1,14 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Cauldron.tscn" type="PackedScene" id=1]
-[ext_resource path="res://Scenes/Node.tscn" type="PackedScene" id=2]
+[ext_resource path="res://Scenes/Stations/Cauldron.tscn" type="PackedScene" id=1]
+[ext_resource path="res://Scenes/Stations/Cauldron.gd" type="Script" id=2]
 
 [node name="Node2D" type="Node2D" index="0"]
 
 [node name="Cauldron" parent="." index="0" instance=ExtResource( 1 )]
 
-position = Vector2( 200, 100 )
+position = Vector2( 220.942, 93.3332 )
+script = ExtResource( 2 )
 _sections_unfolded = [ "Transform" ]
 
 [node name="Camera2D" type="Camera2D" parent="." index="1"]
@@ -36,9 +37,5 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Transform" ]
-
-[node name="Node" parent="." index="2" instance=ExtResource( 2 )]
-
-position = Vector2( 107.368, 98.9474 )
 
 

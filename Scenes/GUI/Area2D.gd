@@ -16,7 +16,6 @@ func _input_event(viewport, event, shape_idx):
 		var root = get_parent()
 		popup.popup()
 		popup.rect_position = Vector2(root.position.x - 20, root.position.y - 60)
-	pass
 
 
 
