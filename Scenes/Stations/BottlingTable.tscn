@@ -1,10 +1,9 @@
 [gd_scene load_steps=3 format=2]
 
-[ext_resource path="res://Scenes/Stations/Storage.gd" type="Script" id=1]
+[ext_resource path="res://Scenes/Stations/BottlingTable.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/temp/node.png" type="Texture" id=2]
 
-
-[node name="IngBox" type="Node2D" index="0"]
+[node name="BottlingTable" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 

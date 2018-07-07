@@ -1,12 +1,16 @@
-extends "Station.gd"
+extends 'Station.gd'
 
-var contentType
-var amount
+# class member variables go here, for example:
+# var a = 2
+# var b = "textvar"
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
 	pass
+
+func make():
+	print("Override")
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

@@ -3,7 +3,7 @@
 [ext_resource path="res://Scenes/Stations/PotionBox.gd" type="Script" id=1]
 [ext_resource path="res://Sprites/temp/node.png" type="Texture" id=2]
 
-[node name="PotionBox" type="Node2D"]
+[node name="PotionBox" type="Node2D" index="0"]
 
 script = ExtResource( 1 )
 
