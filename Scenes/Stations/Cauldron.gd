@@ -8,9 +8,10 @@ func _ready():
 	pass
 
 func _init():
-	sizeIn = 100
-	sizeOut = 10
+	maxReagents = 100
+	maxProducts = 10
 	time = 10
+	batchSize = 10
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.

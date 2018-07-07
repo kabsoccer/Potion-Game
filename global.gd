@@ -47,7 +47,7 @@ func _ready():
 	
 	# Put some ingredients in storage
 	var storage = Storage.new()
-	storage.products["chopped mushroom"] = 39
+	storage.products["chopped mushroom"] = 1000
 	storage.products["boiled broccoli"] = 1000
 	# print(storage.output)
 	
@@ -55,7 +55,8 @@ func _ready():
 	cauldron.inputStations.append(storage)
 	cauldron.input = {"chopped mushroom": 4, "boiled broccoli": 6}
 	cauldron.reagents = {"chopped mushroom": 0, "boiled broccoli": 0}
-	cauldron.output = "potion"
+	cauldron.output = {"potion": 10}
+	cauldron.products = {"potion": 0}
 	
 	cauldron.start()
 
