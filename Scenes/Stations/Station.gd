@@ -8,6 +8,7 @@ var reagents = {}
 var maxReagents
 var reagentsLimits = {}
 var inputStations = []
+var isBatch
 var batchSize
 var time
 var counter
@@ -37,11 +38,18 @@ func gather():
 	
 	# Calculate gather limits
 	for i in input:
-		reagentsLimits[i] = (input[i] * 0.1) * maxReagents
+		reagentsLimits[i] = input[i] * maxReagents / 10
 	
 	# print("Reagent Limits: " + str(reagentsLimits))
 	
 	var isFull = true
+	
+	# If the station is a BATCH process, don't gather during run
+	if runTimer.is_stopped() and isBatch == true:
+		pass
+	else:
+		# print("busy running")
+		return
 	
 	# Are we at the limit? If so, don't gather
 	for i in reagents:
@@ -89,9 +97,15 @@ func gather():
 	# print("Reagents: " + str(reagents))
 
 func runCheck():
-	print("runCheck")
 	# Did we get enough for the batch?
 	var isEnough = true
+	
+	# Is the station already running?
+	if runTimer.is_stopped():
+		pass
+	else:
+		# print("busy running")
+		return
 	
 	for i in reagents:
 		if reagents[i] < input[i] * batchSize:
@@ -118,6 +132,9 @@ func runCheck():
 	
 	if totalProducts <= maxProducts - totalOutput:
 		if runTimer.is_stopped():
+			print("runCheck successful!")
+			for i in reagents:
+				reagents[i] -= input[i] * batchSize
 			startRunTimer()
 	else:
 		print("busy or no room for products")
@@ -140,8 +157,12 @@ func on_run_timer_timeout():
 
 func run():
 	print("run")
-	for i in reagents:
-		reagents[i] -= input[i] * batchSize
 	for i in output:
 		products[i] += output[i]
 	print(products)
+	clear()
+	
+func clear():
+	for i in output:
+		products[i] -= products[i]
+	print("cleared!")

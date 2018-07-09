@@ -47,8 +47,8 @@ func _ready():
 	
 	# Put some ingredients in storage
 	var storage = Storage.new()
-	storage.products["chopped mushroom"] = 1000
-	storage.products["boiled broccoli"] = 1000
+	storage.products["chopped mushroom"] = 80
+	storage.products["boiled broccoli"] = 120
 	# print(storage.output)
 	
 	var cauldron = get_node("/root/Node2D/Cauldron")
