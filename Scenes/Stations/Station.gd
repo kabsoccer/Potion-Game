@@ -14,25 +14,30 @@ var time
 var counter
 var timer
 var runTimer
+var manager
+var isAssigned = {}
 
 func _ready():
 	# Called when the node is added to the scene for the first time.
 	# Initialization here
-	pass
+	manager = get_node("/root/Node2D/Manager")
 
-func start():
-	counter = time
-	print("Initializing")
-	
+func _init():
 	timer = Timer.new()
 	timer.set_wait_time(1)
 	timer.connect("timeout", self, "on_timer_timeout")
 	add_child(timer)
-	timer.start()
 	
 	runTimer = Timer.new()
 	runTimer.connect("timeout", self, "on_run_timer_timeout")
 	add_child(runTimer)
+
+func start():
+	counter = time
+	print("Initializing")
+	timer.start()
+	for i in input:
+		isAssigned[i] = false
 
 func on_timer_timeout():
 	gather()
@@ -76,9 +81,18 @@ func gather():
 	for i in input:
 		var totalReagents = reagentsLimits[i]
 		if reagents[i] == reagentsLimits[i]:
-			break
+			continue
+			
+		if isAssigned[i]:
+			print(i + " is already assigned")
+			continue
+		
+		print("Sending gather request for " + i)
+		manager.askGather(self, i)
+		isAssigned[i] = true
+		
 		# Loop through input stations
-		for j in inputStations:
+		"""for j in inputStations:
 			# Loop through products of input stations
 			for k in j.products:
 				# Is this products the right type?
@@ -90,14 +104,14 @@ func gather():
 						j.products[k] = 0
 					else:
 						j.products[k] -= totalReagents - reagents[i]
-						reagents[i] += totalReagents - reagents[i]
+						reagents[i] += totalReagents - reagents[i]"""
 	
 	# Print final input quantities
 	# for i in inputStations:
 		# print("Input Station: " + str(i.products))
 	
 	# Print the reagents in the cauldron
-	print("Reagents: " + str(reagents))
+	# print("Reagents: " + str(reagents))
 
 func runCheck():
 	# Did we get enough for the batch?
@@ -112,14 +126,15 @@ func runCheck():
 	
 	for i in reagents:
 		if reagents[i] < input[i] * batchSize:
-			print("Not enough " + i + "!")
+			# print("Not enough " + i + "!")
 			isEnough = false
 	
 	# If not, exit the function
 	if !isEnough:
 		for i in inputStations:
-			print("Input: " + str(i.products))
-		print("Reagents: " + str(reagents))
+			# print("Input: " + str(i.products))
+			pass
+		# print("Reagents: " + str(reagents))
 		return
 	
 	# Is there room for a new batch?
@@ -135,16 +150,17 @@ func runCheck():
 	
 	if totalProducts <= maxProducts - totalOutput:
 		if runTimer.is_stopped():
-			print("runCheck successful!")
+			# print("runCheck successful!")
 			for i in reagents:
 				reagents[i] -= input[i] * batchSize
 			startRunTimer()
 	else:
-		print("busy or no room for products")
+		# print("busy or no room for products")
+		pass
 
 func startRunTimer():
 	counter = time
-	print("Starting timer")
+	# print("Starting timer")
 	runTimer.set_wait_time(1)
 	runTimer.start()
 
@@ -152,12 +168,12 @@ func on_run_timer_timeout():
 	counter = counter - 1
 	print(counter)
 	if counter <= 0:
-		print("Timer finished")
+		# print("Timer finished")
 		runTimer.stop()
 		run()
 
 func run():
-	print("run")
+	# print("run")
 	for i in output:
 		products[i] += output[i]
 	print(products)
@@ -166,4 +182,8 @@ func run():
 func clear():
 	for i in output:
 		products[i] -= products[i]
-	print("cleared!")
+	# print("cleared!")
+
+func assign(worker, task, param):
+	print("Assigned: " + str(worker) + " " + task + " " + param)
+	pass

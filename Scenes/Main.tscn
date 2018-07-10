@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=2]
+[gd_scene load_steps=4 format=2]
 
 [ext_resource path="res://Scenes/Stations/Cauldron.tscn" type="PackedScene" id=1]
 [ext_resource path="res://Scenes/Stations/Cauldron.gd" type="Script" id=2]
+[ext_resource path="res://Scenes/Manager.tscn" type="PackedScene" id=3]
 
 [node name="Node2D" type="Node2D" index="0"]
 
@@ -37,5 +38,9 @@ editor_draw_screen = true
 editor_draw_limits = false
 editor_draw_drag_margin = false
 _sections_unfolded = [ "Transform" ]
+
+[node name="Workers" type="Node2D" parent="." index="2"]
+
+[node name="Manager" parent="." index="3" instance=ExtResource( 3 )]
 
 

@@ -7,6 +7,7 @@ const IntroRecipe = preload("res://IntroRecipe.gd")
 const Storage = preload("res://Scenes/Stations/Storage.gd")
 const PotionBox = preload("res://Scenes/Stations/PotionBox.tscn")
 const BottlingTable = preload("res://Scenes/Stations/BottlingTable.tscn")
+const Manager = preload("res://Scenes/Manager.tscn")
 
 var ingredients = {
 	"mushroom": {
@@ -59,6 +60,11 @@ func _ready():
 	cauldron.products = {"potion": 0}
 	
 	cauldron.start()
+	
+	var manager = get_node("/root/Node2D/Manager")
+	manager.createWorker()
+	manager.createWorker()
+	print(manager.workerList)
 
 #func _process(delta):
 #	# Called every frame. Delta is time since last frame.
