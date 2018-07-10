@@ -23,12 +23,16 @@ func _ready():
 func start():
 	counter = time
 	print("Initializing")
+	
 	timer = Timer.new()
 	timer.set_wait_time(1)
 	timer.connect("timeout", self, "on_timer_timeout")
 	add_child(timer)
 	timer.start()
+	
 	runTimer = Timer.new()
+	runTimer.connect("timeout", self, "on_run_timer_timeout")
+	add_child(runTimer)
 
 func on_timer_timeout():
 	gather()
@@ -45,9 +49,7 @@ func gather():
 	var isFull = true
 	
 	# If the station is a BATCH process, don't gather during run
-	if runTimer.is_stopped() and isBatch == true:
-		pass
-	else:
+	if isBatch and !runTimer.is_stopped():
 		# print("busy running")
 		return
 	
@@ -70,6 +72,7 @@ func gather():
 	
 	# Gathering inputs from inputStations
 	# Loop through inputs
+	print("Gathering")
 	for i in input:
 		var totalReagents = reagentsLimits[i]
 		if reagents[i] == reagentsLimits[i]:
@@ -94,7 +97,7 @@ func gather():
 		# print("Input Station: " + str(i.products))
 	
 	# Print the reagents in the cauldron
-	# print("Reagents: " + str(reagents))
+	print("Reagents: " + str(reagents))
 
 func runCheck():
 	# Did we get enough for the batch?
@@ -143,8 +146,6 @@ func startRunTimer():
 	counter = time
 	print("Starting timer")
 	runTimer.set_wait_time(1)
-	runTimer.connect("timeout", self, "on_run_timer_timeout")
-	add_child(runTimer)
 	runTimer.start()
 
 func on_run_timer_timeout():
